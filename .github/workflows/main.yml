@@ -48,5 +48,5 @@ jobs:
     steps:
       - uses: juliangruber/approve-pull-request-action@v2
         with:
-          github-token: ${{ secrets.MY_GH_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           number: ${{ github.event.pull_request.number }}
