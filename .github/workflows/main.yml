@@ -1,0 +1,50 @@
+name: label snyk PRs
+
+# Start when a new PR is created from a snyk branch
+on:
+  pull_request:
+    types: [ready_for_review, reopened, synchronize, opened]
+  pull_request_review:
+    types: [ submitted ]
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  install_job:
+    if: startsWith(github.head_ref, 'snyk-')
+    name: install
+    runs-on: [self-hosted, size/small]
+    container:
+      image: dock.es.ecg.tools/emiranda/node-alpine-gh-workflow
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: test
+        run: npm t
+
+
+  enable_auto_merge_job:
+    needs: install_job # depends on previous install job
+    runs-on: [self-hosted, size/small]
+
+    steps:
+      - uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          pull-request-number: ${{ github.event.pull_request.number }}
+          merge-method: squash
+
+  auto_approve_job:
+    needs: enable_auto_merge_job
+    runs-on: [self-hosted, size/small]
+
+    steps:
+      - uses: juliangruber/approve-pull-request-action@v2
+        with:
+          github-token: ${{ secrets.MY_GH_TOKEN }}
+          number: ${{ github.event.pull_request.number }}

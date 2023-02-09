@@ -1,0 +1,25 @@
+{
+  "name": "giwan-test-auto-merge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.es.ecg.tools:ecg-marktplaats/giwan-test-auto-merge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "front-matter": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "babel-jest": "^29.4.1",
+    "jest": "^29.4.1",
+    "jest-environment-jsdom": "^29.4.1"
+  }
+}
