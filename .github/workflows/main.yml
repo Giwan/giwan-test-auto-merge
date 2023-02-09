@@ -30,20 +30,9 @@ jobs:
       - name: test
         run: npm t
 
-
-  enable_auto_merge_job:
-    needs: install_job # depends on previous install job
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: peter-evans/enable-pull-request-automerge@v2
-        with:
-          pull-request-number: ${{ github.event.pull_request.number }}
-          merge-method: squash
-
   auto_approve_job:
-    needs: enable_auto_merge_job
-    runs-on: [self-hosted, size/small]
+    needs: install_job
+    runs-on: ubuntu-latest
 
     steps:
       - uses: juliangruber/approve-pull-request-action@v2
