@@ -30,7 +30,7 @@ jobs:
       - name: test
         run: npm t
 
-  auto_approve_job:
+  auto_merge_job:
     needs: install_job
     runs-on: ubuntu-latest
 
