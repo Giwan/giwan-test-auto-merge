@@ -35,8 +35,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: juliangruber/merge-pull-request-action@v1
+      - uses: giwan/auto-merge-pr@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ github.event.pull_request.number }}
-          method: squash
+          pull-request-number: ${{ github.event.pull_request.number }}
