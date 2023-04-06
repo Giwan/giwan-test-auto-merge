@@ -1,0 +1,20 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base"
+  ],
+  "prHourlyLimit": 3,
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    }, 
+    {
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true, 
+      // auto merge defaults to automergeType = "pr"
+      // https://docs.renovatebot.com/configuration-options/#automergetype
+      "commitMessageTopic": "Patch and Minor versions"
+    } 
+   ]
+}
