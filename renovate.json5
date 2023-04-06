@@ -14,7 +14,8 @@
       "automerge": true, 
       // auto merge defaults to automergeType = "pr"
       // https://docs.renovatebot.com/configuration-options/#automergetype
-      "commitMessageTopic": "Patch and Minor versions"
+      "commitMessagePrefix": "Renovate-bot: ",
+      "commitMessageAction": "Patch and Minor versions",
     } 
    ]
 }
